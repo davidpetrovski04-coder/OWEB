@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="mk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Travel Planner – откривај градови, планирај патувања и споделувај впечатоци."
+    />
+    <title>Travel Planner | Откриј го светот</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Travel Planner почетна">
+        <span class="brand-mark">✈</span
+        ><span>travel<span class="brand-accent">planner</span></span>
+      </a>
+      <nav id="mainNav">
+        <a href="#home">Почетна</a>
+        <a href="#destinations">Дестинации</a>
+        <a href="#gallery">Галерија</a>
+        <a href="#guide">Водич</a>
+        <a href="#survey">Анкета</a>
+      </nav>
+      <button class="btn btn-outline login-btn" id="loginBtn">Најави се</button>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow light">ПАТУВАЊЕТО ПОЧНУВА ТУКА</p>
+          <h1>Светот е полн<br />со <em>приказни.</em></h1>
+          <p class="hero-copy">
+            Пронајди ја следната дестинација, испланирај го буџетот и создај
+            спомени што траат.
+          </p>
+          <a class="btn btn-primary" href="#destinations"
+            >Истражи дестинации <span>→</span></a
+          >
+        </div>
+        <div class="hero-note">
+          <span class="note-line"></span> ОТКРИЈ. ИСТРАЖИ. ДОЖИВЕЈ.
+        </div>
+      </section>
+
+      <section class="intro section-wrap">
+        <div>
+          <p class="eyebrow">ТВОЕТО СЛЕДНО ПАТУВАЊЕ</p>
+          <h2>Каде ќе те однесе<br /><em>љубопитноста?</em></h2>
+        </div>
+        <p class="intro-text">
+          Од романтични улици до планински пејзажи – избери место, разгледај ги
+          најинтересните знаменитости и направи план според твојот буџет.
+        </p>
+      </section>
+
+      <section class="section-wrap destinations-section" id="destinations">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ИЗБЕРИ ЈА СЛЕДНАТА АВАНТУРА</p>
+            <h2>Популарни <em>дестинации</em></h2>
+          </div>
+          <button class="btn btn-dark" id="addDestinationBtn">
+            ＋ Додај дестинација
+          </button>
+        </div>
+        <div class="filters">
+          <label class="search-box"
+            ><span>⌕</span
+            ><input
+              id="searchInput"
+              type="search"
+              placeholder="Пребарај град..."
+          /></label>
+          <select id="categoryFilter" aria-label="Филтрирај категорија">
+            <option value="all">Сите категории</option>
+            <option value="Култура">Култура</option>
+            <option value="Море">Море</option>
+            <option value="Природа">Природа</option>
+            <option value="Градски одмор">Градски одмор</option>
+          </select>
+          <select id="budgetFilter" aria-label="Филтрирај буџет">
+            <option value="all">Секој буџет</option>
+            <option value="low">До 300 €</option>
+            <option value="mid">300–700 €</option>
+            <option value="high">Над 700 €</option>
+          </select>
+        </div>
+        <div class="destination-grid" id="destinationGrid"></div>
+        <p class="empty-state hidden" id="emptyState">
+          Нема дестинации според избраните филтри.
+        </p>
+      </section>
+
+      <section class="quote-band">
+        <p>“</p>
+        <h2>Не собирај работи.<br /><em>Собирај моменти.</em></h2>
+        <span>— ПАТУВАЧКА МУДРОСТ</span>
+      </section>
+
+      <section class="section-wrap gallery-section" id="gallery">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ВИЗУЕЛНО ПАТУВАЊЕ</p>
+            <h2>Галерија на <em>спомени</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Избери град и разгледај фотографии и впечатоци од патници.
+          </p>
+        </div>
+        <div class="gallery-toolbar">
+          <label for="galleryCity">Избери град:</label
+          ><select id="galleryCity"></select>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="comments-panel">
+          <div>
+            <h3>Коментари за <span id="commentCityName">градот</span></h3>
+            <p class="muted">Сподели што ти оставило најголем впечаток.</p>
+          </div>
+          <form id="commentForm" class="comment-form">
+            <input
+              id="commentInput"
+              maxlength="180"
+              placeholder="Напиши коментар..."
+              required
+            /><button class="btn btn-dark" type="submit">Објави</button>
+          </form>
+          <div id="commentsList" class="comments-list"></div>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="section-wrap">
+          <p class="eyebrow light">ИНСПИРАЦИЈА ЗА ПАТ</p>
+          <div class="section-heading guide-heading">
+            <h2>Мал водич,<br /><em>големи доживувања.</em></h2>
+            <p class="section-subtitle">
+              Идеи за места што вреди да ги ставиш на твојата листа.
+            </p>
+          </div>
+          <div class="guide-grid" id="guideGrid"></div>
+        </div>
+      </section>
+
+      <section class="section-wrap survey-section" id="survey">
+        <div class="survey-copy">
+          <p class="eyebrow">ТВОЕТО МИСЛЕЊЕ Е ВАЖНО</p>
+          <h2>Какво беше твоето<br /><em>искуство?</em></h2>
+          <p>
+            Пополнете ја кратката анкета и помогнете ни да го подобриме Travel
+            Planner.
+          </p>
+          <div class="survey-stat">
+            <strong id="surveyCount">0</strong><span>испратени впечатоци</span>
+          </div>
+        </div>
+        <form id="surveyForm" class="survey-form">
+          <label
+            >Име и презиме<input
+              name="name"
+              required
+              maxlength="60"
+              placeholder="Твоето име"
+          /></label>
+          <label
+            >Е-пошта<input
+              name="email"
+              type="email"
+              required
+              placeholder="ime@example.com"
+          /></label>
+          <label
+            >Која дестинација ја посети?<select
+              name="destination"
+              required
+              id="surveyDestination"
+            ></select
+          ></label>
+          <fieldset>
+            <legend>Како го оценуваш сајтот?</legend>
+            <div class="rating-options">
+              <label>
+                <input type="radio" name="rating" value="Одлично" required />
+                <span>Одлично</span>
+              </label>
+              <label>
+                <input type="radio" name="rating" value="Добро" /><span
+                  >Добро</span
+                ></label
+              ><label
+                ><input type="radio" name="rating" value="Може подобро" /><span
+                  >Може подобро</span
+                ></label
+              >
+            </div>
+          </fieldset>
+          <label
+            >Дополнителен коментар<textarea
+              name="message"
+              rows="4"
+              maxlength="500"
+              placeholder="Кажи ни го твоето мислење..."
+            ></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">
+            Испрати анкета <span>→</span>
+          </button>
+          <p class="form-message" id="surveyMessage" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <a class="brand footer-brand" href="#home"
+          ><span class="brand-mark">✈</span
+          ><span>travel<span class="brand-accent">planner</span></span></a
+        >
+        <p>Планирај помалку. Доживеј повеќе.</p>
+        <a href="#home" class="back-top">НАГОРЕ ↑</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Travel Planner. Сите права се задржани.</span
+        ><span>Направено за љубителите на патувања.</span>
+      </div>
+    </footer>
+
+    <dialog id="destinationDialog" class="modal">
+      <form id="destinationForm" method="dialog">
+        <button
+          type="button"
+          class="modal-close"
+          id="closeDestination"
+          aria-label="Затвори"
+        >
+          ×
+        </button>
+        <p class="eyebrow">ПЕРСОНАЛИЗИРАЈ ЈА ЛИСТАТА</p>
+        <h2>Нова <em>дестинација</em></h2>
+        <label
+          >Име на град<input
+            name="city"
+            required
+            maxlength="40"
+            placeholder="На пример: Прага"
+        /></label>
+        <label
+          >Држава<input
+            name="country"
+            required
+            maxlength="40"
+            placeholder="На пример: Чешка"
+        /></label>
+        <label
+          >Категорија<select name="category" required>
+            <option value="Култура">Култура</option>
+            <option value="Море">Море</option>
+            <option value="Природа">Природа</option>
+            <option value="Градски одмор">Градски одмор</option>
+          </select></label
+        >
+        <label
+          >Проценет буџет (€)<input
+            name="budget"
+            type="number"
+            min="1"
+            max="100000"
+            required
+            placeholder="450"
+        /></label>
+        <label
+          >URL на фотографија<input
+            name="image"
+            type="url"
+            placeholder="https://..."
+        /></label>
+        <label
+          >Краток опис<textarea
+            name="description"
+            rows="3"
+            maxlength="180"
+            placeholder="Опиши ја дестинацијата..."
+          ></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">
+          Зачувај дестинација
+        </button>
+      </form>
+    </dialog>
+
+    <dialog id="loginDialog" class="modal">
+      <form id="loginForm" method="dialog">
+        <button
+          type="button"
+          class="modal-close"
+          id="closeLogin"
+          aria-label="Затвори"
+        >
+          ×
+        </button>
+        <p class="eyebrow">ДОБРЕДОЈДЕ НАЗАД</p>
+        <h2>Најави <em>се</em></h2>
+        <label
+          >Е-пошта<input
+            type="email"
+            name="email"
+            required
+            placeholder="ime@example.com"
+        /></label>
+        <label
+          >Лозинка<input
+            type="password"
+            name="password"
+            required
+            minlength="4"
+            placeholder="Најмалку 4 знаци"
+        /></label>
+        <button class="btn btn-primary" type="submit">Најави се</button>
+        <p id="loginMessage" class="form-message" role="status"></p>
+      </form>
+    </dialog>
+
+    <dialog id="cityDialog" class="modal city-modal">
+      <button
+        type="button"
+        class="modal-close"
+        id="closeCity"
+        aria-label="Затвори"
+      >
+        ×
+      </button>
+      <div id="cityDetails"></div>
+    </dialog>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
