@@ -1,0 +1,39 @@
+body {
+    background-color: #ebeee6;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    margin: 20px;
+}
+.naslov {
+    text-align: center;
+    color: #087e8b;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+h2 {
+    color: #087e8b;
+    text-decoration: underline;
+    margin-top: 25px;
+}
+h3 {
+    color: #0dc798;
+}
+.div {
+    display: inline-block;
+    width: 28%;
+    min-height: 150px;
+    background-color: white;
+    border: 2px solid #08418b;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 2px 3px 8px gray;
+}
+p {
+    color: #748e38;
+    font-weight: bold;
+}
+hr {
+    border: 1px solid #08418b;
+    margin: 25px 0;
+}
