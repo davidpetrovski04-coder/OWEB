@@ -33,6 +33,7 @@
         <a href="#destinations">Дестинации</a>
         <a href="#gallery">Галерија</a>
         <a href="#guide">Водич</a>
+        <a href="#articles">Статии</a>
         <a href="#survey">Анкета</a>
       </nav>
       <button class="btn btn-outline login-btn" id="loginBtn">Најави се</button>
@@ -104,6 +105,19 @@
         <p class="empty-state hidden" id="emptyState">
           Нема дестинации според избраните филтри.
         </p>
+      </section>
+      <section class="section-wrap articles-section" id="articles">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ИНСПИРАЦИЈА ЗА ПАТУВАЊЕ</p>
+            <h2>Статии од <em>светот</em></h2>
+          </div>
+          <p class="section-subtitle">
+            Откриј интересни места, знаменитости и совети за патување.
+          </p>
+        </div>
+      
+        <div class="articles-grid" id="articlesGrid"></div>
       </section>
 
       <section class="quote-band">
@@ -240,7 +254,7 @@
       </div>
     </footer>
 
-    <dialog id="destinationDialog" class="modal">
+    <dialog id="destinationDialog" class="app-dialog">
       <form id="destinationForm" method="dialog">
         <button
           type="button"
@@ -303,7 +317,7 @@
       </form>
     </dialog>
 
-    <dialog id="loginDialog" class="modal">
+    <dialog id="loginDialog" class="app-dialog">
       <form id="loginForm" method="dialog">
         <button
           type="button"
@@ -335,18 +349,25 @@
       </form>
     </dialog>
 
-    <dialog id="cityDialog" class="modal city-modal">
-      <button
-        type="button"
-        class="modal-close"
-        id="closeCity"
-        aria-label="Затвори"
-      >
+    <dialog id="cityDialog" class="app-dialog city-modal">
+      <button type="button" class="modal-close" id="closeCity">
         ×
       </button>
       <div id="cityDetails"></div>
     </dialog>
+
+    <dialog id="articleDialog" class="app-dialog article-dialog">
+      <button type="button" class="modal-close" id="closeArticle">
+        ×
+      </button>
+      <div id="articleDetails"></div>
+    </dialog>
+
     <div class="toast" id="toast" role="status"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
     <script src="script.js"></script>
   </body>
 </html>
