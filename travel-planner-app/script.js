@@ -296,6 +296,11 @@ let destinations = load("tp_destinations", defaultDestinations);
 let comments = load("tp_comments", {});
 let reactions = load("tp_reactions", {});
 let surveys = load("tp_surveys", []);
+let users = load("tp_users", []);
+if (!Array.isArray(users)) users = [];
+let currentUser = load("tp_current_user", null);
+if (!currentUser || !users.some((user) => user.email === currentUser.email))
+  currentUser = null;
 let activeCity = destinations[0]?.city || "";
 const $ = (s) => document.querySelector(s);
 const money = (n) => new Intl.NumberFormat("de-DE").format(n);
@@ -309,6 +314,16 @@ function load(key, fallback) {
 }
 function save(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
+}
+function updateAuthUI() {
+  const loggedIn = Boolean(currentUser);
+  $("#loginBtn").textContent = loggedIn ? "Одјави се" : "Најави се";
+  $("#addDestinationBtn").hidden = !loggedIn;
+  $("#addDestinationBtn").classList.toggle("hidden", !loggedIn);
+  $("#commentForm").hidden = !loggedIn;
+  $("#commentForm").classList.toggle("hidden", !loggedIn);
+  $("#commentAuthPrompt").hidden = loggedIn;
+  $("#commentAuthPrompt").classList.toggle("hidden", loggedIn);
 }
 function toast(message) {
   const el = $("#toast");
@@ -628,23 +643,37 @@ $("#galleryGrid").addEventListener("click", (e) => {
 });
 $("#commentForm").addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!currentUser) {
+    updateAuthUI();
+    $("#loginDialog").showModal();
+    return;
+  }
   const text = $("#commentInput").value.trim();
   if (!text) return;
   comments[activeCity] ??= [];
-  comments[activeCity].push({ name: "Посетител", text });
+  comments[activeCity].push({ name: currentUser.name, text });
   save("tp_comments", comments);
   $("#commentInput").value = "";
   renderGallery();
   toast("Коментарот е објавен.");
 });
-$("#addDestinationBtn").addEventListener("click", () =>
-  $("#destinationDialog").showModal(),
-);
+$("#addDestinationBtn").addEventListener("click", () => {
+  if (!currentUser) {
+    $("#loginDialog").showModal();
+    return;
+  }
+  $("#destinationDialog").showModal();
+});
 $("#closeDestination").addEventListener("click", () =>
   $("#destinationDialog").close(),
 );
 $("#destinationForm").addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!currentUser) {
+    $("#destinationDialog").close();
+    $("#loginDialog").showModal();
+    return;
+  }
   const f = new FormData(e.currentTarget);
   const city = f.get("city").trim();
   if (
@@ -685,14 +714,83 @@ $("#surveyForm").addEventListener("submit", (e) => {
     "Ти благодариме! Анкетата е успешно зачувана.";
   $("#surveyCount").textContent = surveys.length;
 });
-$("#loginBtn").addEventListener("click", () => $("#loginDialog").showModal());
+$("#loginBtn").addEventListener("click", () => {
+  if (currentUser) {
+    localStorage.removeItem("tp_current_user");
+    currentUser = null;
+    updateAuthUI();
+    renderGallery();
+    toast("Одјавени сте.");
+    return;
+  }
+  $("#loginMessage").textContent = "";
+  $("#loginDialog").showModal();
+});
 $("#closeLogin").addEventListener("click", () => $("#loginDialog").close());
-$("#loginForm").addEventListener("submit", (e) => {
+$("#loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = new FormData(e.currentTarget).get("email");
-  $("#loginMessage").textContent = `Демо најава успешна за ${email}.`;
-  $("#loginBtn").textContent = "Мој профил";
-  setTimeout(() => $("#loginDialog").close(), 900);
+  const formElement = e.currentTarget;
+  const form = new FormData(formElement);
+  const email = String(form.get("email")).trim().toLowerCase();
+  const password = String(form.get("password"));
+  const user = users.find(
+    (account) => account.email === email && account.password === password,
+  );
+  if (!user) {
+    $("#loginMessage").textContent = "Е-поштата или лозинката не се точни.";
+    return;
+  }
+  currentUser = { name: user.name, email: user.email };
+  save("tp_current_user", currentUser);
+  updateAuthUI();
+  renderGallery();
+  $("#loginDialog").close();
+  formElement.reset();
+  toast(`Добредојде, ${currentUser.name}!`);
+});
+$("#closeRegister").addEventListener("click", () =>
+  $("#registerDialog").close(),
+);
+$("#openRegister").addEventListener("click", () => {
+  $("#loginDialog").close();
+  $("#registerMessage").textContent = "";
+  $("#registerDialog").showModal();
+});
+$("#openLogin").addEventListener("click", () => {
+  $("#registerDialog").close();
+  $("#loginMessage").textContent = "";
+  $("#loginDialog").showModal();
+});
+$("#commentLoginBtn").addEventListener("click", () => {
+  $("#loginMessage").textContent = "";
+  $("#loginDialog").showModal();
+});
+$("#registerForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formElement = e.currentTarget;
+  const form = new FormData(formElement);
+  const name = String(form.get("name")).trim();
+  const email = String(form.get("email")).trim().toLowerCase();
+  const password = String(form.get("password"));
+  const confirmPassword = String(form.get("confirmPassword"));
+  if (password !== confirmPassword) {
+    $("#registerMessage").textContent = "Лозинките не се совпаѓаат.";
+    return;
+  }
+  if (users.some((user) => user.email === email)) {
+    $("#registerMessage").textContent =
+      "Веќе постои сметка со оваа е-пошта. Најави се.";
+    return;
+  }
+  const user = { name, email, password };
+  save("tp_users", [...users, user]);
+  users.push(user);
+  formElement.reset();
+  $("#registerDialog").close();
+  $("#loginMessage").textContent =
+    "Сметката е креирана. Најави се со твојата е-пошта и лозинка.";
+  $("#loginForm [name='email']").value = email;
+  $("#loginDialog").showModal();
 });
 $("#closeCity").addEventListener("click", () => $("#cityDialog").close());
 $("#mainNav").addEventListener("click", (e) => {
@@ -711,4 +809,5 @@ $("#closeArticle").addEventListener("click", () => {
 });
 renderGuides();
 renderArticles();
+updateAuthUI();
 refresh();

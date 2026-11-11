@@ -75,7 +75,7 @@
             <p class="eyebrow">ИЗБЕРИ ЈА СЛЕДНАТА АВАНТУРА</p>
             <h2>Популарни <em>дестинации</em></h2>
           </div>
-          <button class="btn btn-dark" id="addDestinationBtn">
+          <button class="btn btn-dark hidden" id="addDestinationBtn" hidden>
             ＋ Додај дестинација
           </button>
         </div>
@@ -146,7 +146,13 @@
             <h3>Коментари за <span id="commentCityName">градот</span></h3>
             <p class="muted">Сподели што ти оставило најголем впечаток.</p>
           </div>
-          <form id="commentForm" class="comment-form">
+          <p id="commentAuthPrompt" class="muted comment-auth-prompt">
+            Најави се за да објавиш коментар.
+            <button type="button" class="text-button" id="commentLoginBtn">
+              Најави се
+            </button>
+          </p>
+          <form id="commentForm" class="comment-form hidden" hidden>
             <input
               id="commentInput"
               maxlength="180"
@@ -341,11 +347,75 @@
             type="password"
             name="password"
             required
-            minlength="4"
-            placeholder="Најмалку 4 знаци"
+            minlength="8"
+            placeholder="Најмалку 8 знаци"
         /></label>
         <button class="btn btn-primary" type="submit">Најави се</button>
         <p id="loginMessage" class="form-message" role="status"></p>
+        <p class="auth-switch">
+          Немаш сметка?
+          <button type="button" class="text-button" id="openRegister">
+            Регистрирај се
+          </button>
+        </p>
+      </form>
+    </dialog>
+
+    <dialog id="registerDialog" class="app-dialog">
+      <form id="registerForm" method="dialog">
+        <button
+          type="button"
+          class="modal-close"
+          id="closeRegister"
+          aria-label="Затвори"
+        >
+          ×
+        </button>
+        <p class="eyebrow">ПРИДРУЖИ СЕ НА ЗАЕДНИЦАТА</p>
+        <h2>Креирај <em>сметка</em></h2>
+        <label
+          >Име<input
+            type="text"
+            name="name"
+            required
+            maxlength="40"
+            autocomplete="name"
+            placeholder="Твоето име"
+        /></label>
+        <label
+          >Е-пошта<input
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="ime@example.com"
+        /></label>
+        <label
+          >Лозинка<input
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            autocomplete="new-password"
+            placeholder="Најмалку 8 знаци"
+        /></label>
+        <label
+          >Потврди лозинка<input
+            type="password"
+            name="confirmPassword"
+            required
+            minlength="8"
+            autocomplete="new-password"
+            placeholder="Внеси ја лозинката повторно"
+        /></label>
+        <button class="btn btn-primary" type="submit">Креирај сметка</button>
+        <p id="registerMessage" class="form-message" role="status"></p>
+        <p class="auth-switch">
+          Веќе имаш сметка?
+          <button type="button" class="text-button" id="openLogin">
+            Најави се
+          </button>
+        </p>
       </form>
     </dialog>
 

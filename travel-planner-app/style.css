@@ -502,6 +502,25 @@ nav a:hover {
   display: grid;
   gap: 8px;
 }
+.comment-auth-prompt {
+  grid-column: 1/-1;
+  margin: 0;
+  align-self: center;
+}
+.text-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0c7180;
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.auth-switch {
+  margin: 0;
+  color: #71808a;
+  font-size: 12px;
+}
 .comment {
   background: white;
   padding: 11px 14px;
