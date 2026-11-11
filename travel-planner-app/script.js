@@ -21,9 +21,9 @@ const defaultDestinations = [
     category: "Море",
     budget: 420,
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1hjBpB8XdF5RnPTKbsNWnUtwDkH94utvvesEk8QhAxa6EVi3RqolGxWJz&s=10",
-    image2:
       "https://res.cloudinary.com/manawa/image/private/f_auto,c_limit,w_3840,q_auto/mldnwiurimunt8wxvyow",
+    image2:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1hjBpB8XdF5RnPTKbsNWnUtwDkH94utvvesEk8QhAxa6EVi3RqolGxWJz&s=10",
     image3:
       "https://media.cntraveller.com/photos/611bebd1aac234341a8943e6/1:1/w_2000,h_2000,c_limit/mesa-pigadia-w2064a.jpg",
     description:
@@ -123,6 +123,175 @@ const extraTips = [
   "Разговарај со локалните жители",
   "Фотографирај ја омилената улица",
 ];
+
+const articles = [
+  {
+    id: 1,
+    city: "Кјото",
+    country: "Јапонија",
+    category: "Култура",
+    title: "Кјото – 5 места што мора да ги посетиш",
+    image:
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80",
+    intro:
+      "Кјото е град во кој традицијата и модерниот живот се спојуваат. Познат е по храмовите, традиционалните куќи и прекрасните градини.",
+    places: [
+      ["Fushimi Inari Shrine", "Познато светилиште со илјадници црвени порти."],
+      ["Arashiyama Bamboo Forest", "Прекрасна бамбусова шума."],
+      ["Kinkaku-ji", "Познатиот Златен павилјон опкружен со градина."],
+      ["Gion", "Традиционален кварт со историски улици."],
+      ["Kiyomizu-dera", "Историски храм со прекрасен поглед кон градот."],
+    ],
+  },
+  {
+    id: 2,
+    city: "Санторини",
+    country: "Грција",
+    category: "Море",
+    title: "Санторини – водич за совршен одмор",
+    image:
+      "https://res.cloudinary.com/manawa/image/private/f_auto,c_limit,w_3840,q_auto/mldnwiurimunt8wxvyow",
+    intro:
+      "Санторини е познат по белите куќички, сините куполи и прекрасните погледи кон Егејското Море.",
+    places: [
+      ["Oia", "Познато село со прекрасни погледи и зајдисонца."],
+      ["Fira", "Главниот град на островот со продавници и ресторани."],
+      ["Red Beach", "Плажа позната по црвените вулкански карпи."],
+      ["Black Beach", "Плажа со темен вулкански песок."],
+      ["Akrotiri", "Археолошко наоѓалиште со античка историја."],
+    ],
+  },
+  {
+    id: 3,
+    city: "Доломити",
+    country: "Италија",
+    category: "Природа",
+    title: "Доломити – убавините на италијанските Алпи",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80",
+    intro:
+      "Доломитите се познати по своите планински врвови, езера и прекрасни природни пејзажи.",
+    places: [
+      ["Lago di Braies", "Езеро опкружено со високи планински врвови."],
+      ["Tre Cime di Lavaredo", "Три познати планински врвови."],
+      ["Seceda", "Планински предел со впечатливи погледи."],
+      ["Lago di Carezza", "Езеро познато по својата тиркизна боја."],
+      ["Cortina d'Ampezzo", "Планинско место со прекрасна природа."],
+    ],
+  },
+  {
+    id: 4,
+    city: "Prague",
+    country: "Чешка",
+    category: "ИСТОРИЈА И КУЛТУРА",
+    title: "Прага – градот на илјада кули",
+    image: "https://images.unsplash.com/photo-1541849546-216549ae216d",
+    intro:
+      "Прага е еден од најубавите европски градови, позната по својата средновековна архитектура, калдрмисаните улици и историските знаменитости. Градот нуди совршена комбинација од историја, култура и модерни содржини.",
+    places: [
+      {
+        name: "Charles Bridge",
+        description:
+          "Познат мост над реката Влтава, украсен со историски статуи и прекрасен поглед кон градот.",
+      },
+      {
+        name: "Prague Castle",
+        description:
+          "Голем историски комплекс со палати, цркви и прекрасен поглед кон Прага.",
+      },
+      {
+        name: "Old Town Square",
+        description:
+          "Еден од најпознатите плоштади во Прага, опкружен со историски згради и кафулиња.",
+      },
+      {
+        name: "Astronomical Clock",
+        description:
+          "Познат средновековен астрономски часовник поставен на старата градска кула.",
+      },
+      {
+        name: "St. Vitus Cathedral",
+        description:
+          "Импресивна готска катедрала која се наоѓа во комплексот на Прашкиот замок.",
+      },
+    ],
+  },
+  {
+    id: 5,
+    city: "Barcelona",
+    country: "Шпанија",
+    category: "АРХИТЕКТУРА И ПЛАЖИ",
+    title: "Барселона – уметност, сонце и море",
+    image: "https://images.unsplash.com/photo-1583422409516-2895a77efded",
+    intro:
+      "Барселона е живописен град во Шпанија, познат по уникатната архитектура, уметноста, плажите и медитеранската атмосфера. Секоја улица нуди нешто интересно за откривање.",
+    places: [
+      {
+        name: "Sagrada Familia",
+        description:
+          "Познатата базилика дизајнирана од Антони Гауди и еден од главните симболи на градот.",
+      },
+      {
+        name: "Park Güell",
+        description:
+          "Шарен парк со уникатни мозаици, необични архитектонски форми и дела на Гауди.",
+      },
+      {
+        name: "La Rambla",
+        description:
+          "Позната пешачка улица исполнета со продавници, кафулиња и улични уметници.",
+      },
+      {
+        name: "Gothic Quarter",
+        description:
+          "Историски дел од градот со тесни улици, мали плоштади и средновековни градби.",
+      },
+      {
+        name: "Barceloneta Beach",
+        description:
+          "Популарна градска плажа идеална за прошетка и уживање покрај Средоземното Море.",
+      },
+    ],
+  },
+  {
+    id: 6,
+    city: "Amsterdam",
+    country: "Холандија",
+    category: "ГРАДСКА АВАНТУРА",
+    title: "Амстердам – градот на каналите",
+    image: "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4",
+    intro:
+      "Амстердам е познат по своите канали, мостови, музеи и карактеристични куќи. Градот има посебна атмосфера и нуди многу можности за културни и туристички активности.",
+    places: [
+      {
+        name: "Anne Frank House",
+        description:
+          "Музеј посветен на животот на Ана Франк и историјата на нејзиното семејство.",
+      },
+      {
+        name: "Van Gogh Museum",
+        description:
+          "Музеј со голема колекција на уметнички дела од познатиот холандски сликар Винсент ван Гог.",
+      },
+      {
+        name: "Rijksmuseum",
+        description:
+          "Национален музеј со значајни дела од холандската уметност и историја.",
+      },
+      {
+        name: "Dam Square",
+        description:
+          "Централен плоштад опкружен со важни историски градби и познати градски знаменитости.",
+      },
+      {
+        name: "Amsterdam Canals",
+        description:
+          "Познатата мрежа од канали и мостови која го прави Амстердам уникатен европски град.",
+      },
+    ],
+  },
+];
+
 let destinations = load("tp_destinations", defaultDestinations);
 let comments = load("tp_comments", {});
 let reactions = load("tp_reactions", {});
@@ -246,7 +415,7 @@ function renderGallery() {
       "<p>Додај дестинација за да прикажеш галерија.</p>";
     return;
   }
-  const imgs = [d.image, d.image, d.image, d.image, d.image];
+  const imgs = [d.image, d.image2 || d.image, d.image3 || d.image];
   const captions = [
     "Момент што се памети",
     "Убавина на секој чекор",
@@ -288,6 +457,78 @@ function renderGuides() {
     )
     .join("");
 }
+function renderArticles() {
+  $("#articlesGrid").innerHTML = articles
+    .map(
+      (a) => `
+        <article class="article-card">
+          <img
+            src="${safeUrl(a.image)}"
+            alt="${escapeHtml(a.city)}"
+            loading="lazy"
+          />
+
+          <div class="article-card-body">
+            <span class="article-category">
+              ${escapeHtml(a.category)} · ${escapeHtml(a.city)}
+            </span>
+
+            <h3>${escapeHtml(a.title)}</h3>
+
+            <p>${escapeHtml(a.intro)}</p>
+
+            <button
+              class="btn btn-dark"
+              data-article="${a.id}"
+            >
+              Прочитај повеќе →
+            </button>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function showArticle(id) {
+  const article = articles.find((a) => a.id === Number(id));
+
+  if (!article) return;
+
+  $("#articleDetails").innerHTML = `
+    <img
+      class="article-detail-image"
+      src="${safeUrl(article.image)}"
+      alt="${escapeHtml(article.city)}"
+    />
+
+    <span class="article-category">
+      ${escapeHtml(article.category)} · ${escapeHtml(article.country)}
+    </span>
+
+    <h2>${escapeHtml(article.title)}</h2>
+
+    <p>${escapeHtml(article.intro)}</p>
+
+    <h3>5 места што вреди да ги посетиш</h3>
+
+    <div class="article-places">
+      ${article.places
+        .map(
+          (place, index) => `
+            <div class="article-place">
+              <h4>${index + 1}. ${escapeHtml(place[0])}</h4>
+              <p>${escapeHtml(place[1])}</p>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+
+  $("#articleDialog").showModal();
+}
+
 function showCity(id) {
   const d = destinations.find((x) => x.id === Number(id));
   if (!d) return;
@@ -457,5 +698,17 @@ $("#closeCity").addEventListener("click", () => $("#cityDialog").close());
 $("#mainNav").addEventListener("click", (e) => {
   if (e.target.tagName === "A") $("#mainNav").classList.remove("open");
 });
+$("#articlesGrid").addEventListener("click", (e) => {
+  const button = e.target.closest("[data-article]");
+
+  if (button) {
+    showArticle(button.dataset.article);
+  }
+});
+
+$("#closeArticle").addEventListener("click", () => {
+  $("#articleDialog").close();
+});
 renderGuides();
+renderArticles();
 refresh();
